@@ -1,0 +1,28 @@
+def longest_fully_dividing_subsequence(sequence):
+    N = len(sequence)
+    dp = [1] * N  # Initialize Dynamic Progarmning array, each element is a subsequence of length 1
+
+    for i in range(1, N):
+        for j in range(i):
+            # condition: sequence[j] should divide sequence[i]
+            if sequence[i] % sequence[j] == 0:
+                dp[i] = max(dp[i], dp[j] + 1)
+    
+    return max(dp)
+
+# Reading input from a file
+def main():
+    with open("/content/10[1].in", "r") as file:
+        lines = file.readlines()
+        N = int(lines[0])  # First line contains the number of elements
+        sequence = [int(line.strip()) for line in lines[1:]]  # Remaining lines are the sequence
+    
+    # Compute the result
+    result = longest_fully_dividing_subsequence(sequence)
+    
+    # Print the result
+    print(result)
+
+# Call the main function
+if __name__ == "__main__":
+    main()
